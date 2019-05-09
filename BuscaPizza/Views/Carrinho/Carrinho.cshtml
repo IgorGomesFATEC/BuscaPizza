@@ -1,0 +1,82 @@
+﻿@model List<BuscaPizza.Models.DetalheCompra>
+@using BuscaPizza.Models
+@{
+    ViewBag.Title = "Carrinho";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Cliente cliente = (Cliente)Session["cliente"];
+    var a = 0;
+    decimal total = 0;
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Pizzaria/Menu">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <h6>Olá @cliente.nome</h6>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br />
+<br />
+<div class="container">
+    <table class="table table-bordered">
+        <thead class="barra2">
+            <tr>
+                <th scope="col">Nº</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Pizzaria</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Preço</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @{
+                        a++;
+                        total = total + item.Total;
+                    }
+                    <th scope="row">@a</th>
+                    <td>@item.nomeproduto</td>
+                    <td>@item.nomePizzaria</td>
+                    <td>@item.Quantidade</td>
+                    <td>R$ @item.Total</td>
+                </tr>
+
+            }
+        </tbody>
+        <a href="/Pizzaria/Menu" class="btn btn-outline-warning" aligh="right">Continuar comprando</a>
+        <br />
+        <br />
+
+    </table>
+    <h4 align="right">Total: @total</h4>
+    <br />
+    <p align="right">
+        <a href="/Carrinho/Endereco/@cliente.id" class="btn btn-outline-success" aligh="right">Finalizar</a>
+    </p>
+</div>
+
+
+

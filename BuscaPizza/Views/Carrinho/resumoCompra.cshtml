@@ -1,0 +1,118 @@
+﻿@model List<BuscaPizza.Models.DetalheCompra>
+@using BuscaPizza.Models
+@{
+    ViewBag.Title = "Carrinho";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Cliente cliente = (Cliente)Session["cliente"];
+    Pedido pedido = new Pedido();
+    pedido.id_Endereco = (int)Session["endereco"];
+    var a = 0;
+    decimal total = 0;
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div align="center">
+        <br />
+        <h3>Detalhe Compra</h3>
+        <br />
+        <h5>Carrinho</h5>
+    </div>
+    <div align="left">
+        <a class="btn btn-outline-success" href="/Carrinho/Voltar">Voltar ao menu principal</a></a>
+    </div>
+    <div align="center">
+        <table class="table table-bordered">
+            <thead class="barra2">
+                <tr>
+                    <th scope="col">Nº</th>
+                    <th scope="col">Cardapio</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Descricao</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @{
+                            a++;
+                            total = total + item.Total;
+                        }
+                        <th scope="row">@a</th>
+                        <td>@item.nomeproduto</td>
+                        <td>@item.nomePizzaria</td>
+                        <td>@item.Quantidade</td>
+                        <td>R$ @item.Total</td>
+                    </tr>
+
+                }
+            </tbody>
+            <br />
+            <br />
+        </table>
+        <h4 align="right">Total</h4>
+        <h5 align="right">R$ @total</h5>
+        <br />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="card-text">
+                            <h5>Endereço</h5> <hr />
+                            <label>CEP: @ViewBag.resumo.CEP</label>
+                            <br>
+                            <label>Logradouro: @ViewBag.resumo.logradouro </label>
+                            <br />
+                            <label>Numero: @ViewBag.resumo.numero</label>
+                            <br />
+                            <label>Complemento: @ViewBag.resumo.complemento</label>
+                            <br />
+                            <label>Bairro: @ViewBag.resumo.bairro</label>
+                            <br />
+                            <label>Cidade: @ViewBag.resumo.Cidade (@ViewBag.resumo.UF)</label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="card-text">
+                            <h5>Outras Informações</h5> <hr />
+                            <p>Número do Pedido: @ViewBag.id_Pedido</p>
+                            <p>Data do Pedido: @ViewBag.resumo.dataHora</p>
+                            <p>Forma de Pagamento: @ViewBag.resumo.formaPagamento</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

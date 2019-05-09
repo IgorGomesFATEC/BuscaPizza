@@ -1,0 +1,78 @@
+﻿@model  BuscaPizza.Models.Cliente
+@using BuscaPizza.Models
+@{
+    Layout = "~/Views/LayoutPage.cshtml";
+    ViewBag.Title = "Meus Pedidos";
+    Pizzaria pizzaria = (Pizzaria)Session["pizzaria"];
+    var a = 0;
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <!-- Linkar com a página minha conta cliente -->
+                    <a class="nav-link" href="/Pizzaria/dashBoard/@pizzaria.Id">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br />
+<h3 align="center">Fila de Pedidos</h3>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Exemplos endereços -->
+        @foreach (var ped in ViewBag.Pedido)
+        {
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @{a++;}
+                                    <h6>Pedido @a</h6>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a class="card-text">
+                            <label>Cliente: @ped.NomeCliente</label>
+                            <br>
+                            <label>Data do Pedido: @ped.dataHora </label>
+                            <br />
+                            <label>Forma Pagamento: @ped.formaPagamento</label>
+                            <br />
+                            <label>Status: @ped.StatusPedido</label>
+                            <br />
+                        </a>
+                        <a class="btn btn-outline-info" href="/Pizzaria/DetalhePedido/@ped.id"> Detalhe do Pedido</a>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- Fim dos exemplos endereços -->
+    </div>
+</div>
+

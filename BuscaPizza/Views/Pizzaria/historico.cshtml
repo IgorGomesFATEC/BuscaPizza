@@ -1,0 +1,98 @@
+﻿@model BuscaPizza.Models.DetalheCompra
+@using BuscaPizza.Models
+@{
+    ViewBag.Title = "Historico de Pedido";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Pizzaria pizzaria = (Pizzaria)Session["pizzaria"];
+    Pedido pedido = new Pedido();
+    var a = 0;
+    decimal total = 0;
+}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#btnPrint").live("click", function () {
+            var divContents = $("#Print").html();
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>Relatorio de Compra</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+    </script>
+    <header>
+        <nav class="navbar navbar-expand-md barra">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Pizzaria/dashBoard/@pizzaria.Id">
+                            <img src="~/img/Voltar.png" class="botao">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-auto order-0">
+                <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <p class="nav-link"></p>
+                    </li>
+                    <li class="nav-item">
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <br />
+    <h2 align="center">historico</h2>
+    <br />
+    <form id="main">
+        <input type="button" class="btn btn-outline-dark" value="Imprimir Relatorio" id="btnPrint" align="right" />
+        <div class="container" align="center">
+            <div id="Print">
+                <table class="table table-bordered">
+                    <thead class="barra2">
+                        <tr>
+                            <th scope="col">Nº</th>
+                            <th scope="col">Pedido</th>
+                            <th scope="col">Data do Pedido</th>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Cardapio</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.historico)
+                        {
+                            <tr>
+                                @{
+                                    a++;
+                                    total = total + item.Total;
+                                }
+                                <th scope="row">@a</th>
+                                <td>@item.id_Pedido</td>
+                                <td>@item.datahora</td>
+                                <td>@item.nomeproduto</td>
+                                <td>@item.nomecardapio</td>
+                                <td>R$ @item.preco</td>
+                                <td>@item.Quantidade</td>
+                                <td>R$ @item.Total</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                    <br />
+                    <br />
+                </table>
+            </div>
+        </div>
+        <h3 align="right">Total: @total</h3>
+    </form>

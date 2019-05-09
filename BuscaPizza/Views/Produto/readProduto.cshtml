@@ -1,0 +1,69 @@
+﻿@using BuscaPizza.Models
+@{
+    ViewBag.Title = "cadCardapio";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Pizzaria pizzaria = (Pizzaria)Session["pizzaria"];
+    int id = 0;
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Cardapio/cadCardapio/@pizzaria.Id">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container" align="center">
+    <br />
+    <h3>@pizzaria.NomePizzaria</h3>
+    <br />
+   
+        <table class="table table-bordered">
+            <thead class="barra2">
+                <tr>
+                    <th scope="col">Nº</th>
+                    <th scope="col">Cardapio</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Descricao</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var prod in ViewBag.prod)
+                {
+                    <tr>
+                        @{id++;}
+                        <th scope="row">@id</th>
+                        <td>@prod.nomeCardapio</td>
+                        <td>@prod.NomeProduto</td>
+                        <td>@prod.Preco</td>
+                        <td>@prod.descricao</td>
+                    </tr>
+                }
+            </tbody>
+            <br />
+            <br />
+        </table>
+    
+
+</div>

@@ -1,0 +1,161 @@
+﻿@model  BuscaPizza.Models.Cliente
+@{
+    Layout = "~/Views/LayoutPage.cshtml";
+    ViewBag.Title = "Cadastro de Clientes";
+
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/BuscaPizza/Home">
+                        <img src="~/img/Home.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br>
+<br>
+<!-- Modal do Esqueci Minha Senha -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header barra2">
+                <h5 class="modal-title" id="exampleModalLabel">Esqueci minha senha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                Você receberá um email para redefinir sua senha
+                <br>
+                <br>
+                <input type="email" class="form-control new-input" aria-describedby="emailHelp" placeholder="Digite seu email">
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal dos Termos de Uso -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header barra2">
+                <h5 class="modal-title" id="exampleModalLongTitle">Termos e Condições e as Políticas de Privacidade</h5>
+            </div>
+            <div class="modal-body">
+                A) Defina os termos a serem usados no documento. Lembre-se que o usuário, muitas vezes, não tem conhecimento técnico sobre programação ou tecnologia, por isso é importante que você explique a ele de forma clara, objetiva e específica o significado de cada um dos termos utilizados para para a execução do serviços oferecidos ou utilização do produto. B) Delimite o escopo do serviço/produto a ser oferecido via site ou aplicativo. Informa os usuários o que eles estão utilizando ou adquirindo, somente isso evitará reclamações relacionadas ao serviço ou produto. Seja transparente com o seu cliente. C) Informe as responsabilidades da sua empresa e do usuário. Defina a responsabilidade de cada uma das partes. Indicamos a utilização moderada das cláusulas que limitam responsabilidades, tais como as cláusulas de “disclaimer” (Todas as opiniões expressadas nos comentários deste site-aplicativo não expressam a opinião da Startup, mas tão somente a opinião de quem os escreveu”) ou, então, as excludentes de responsabilidade (Exemplo de cláusula: A Startup não se responsabiliza por qualquer dano ou prejuízo com envio de informações ou de conteúdo publicitário que não tenham sido disparados pela própria Startup, sejam esses últimos legítimos ou indesejados (Spam), e também não se responsabiliza pelo conteúdo das opiniões postadas no aplicativo ou site). Elas são uma ótima forma de limitação de responsabilidade, gerando menos riscos a startup, porém utilize-a com moderação para que seu contrato não seja anulado por ser excessivamente oneroso a uma das partes quando numa futura ação judicial e, com isso, o objetivo da política de privacidade ou termo de uso não seja cumprido. D) Divulgue a quem pertence os direitos autorais. Inclua cláusula sobre direitos autorais para impossibilitar o uso da tecnologia desenvolvida pela sua Startup por terceiros não autorizados. E) Disponha como se dará o processo de compra pelo usuário. Informe como será feita a aquisição do seu serviço/produto, como será o processo de devolução ou rescisão do contrato, se haverá reembolso dos valores pagos e como será feito, além disso como deverá proceder para cancelar o serviço. Indicamos, por outro lado, que a “Política de Privacidade” contenham as seguintes cláusulas: A) Expresse quais informações serão coletadas e de que forma. B) Preveja se as informações coletadas serão disponibilizadas a terceiros e como serão disponibilizadas. C) Indique como serão armazenadas as informações coletadas. D) Informe as modificações da política de privacidade. Caso você venha a alterar a política de privacidade, informe os usuários sobre a modificação para que eles estejam cientes da forma com que serão tratados a partir de então. Além disso, alerte como os usuários terão conhecimento da nova política de privacidade. Indicamos nesse ponto, que qualquer alteração seja amplamente divulgada, para que todas tenham conhecimento das novas regras. E) Divulgue na Política de Privacidade se o seu aplicativo utiliza cookies. F) Defina qual será a faixa etária que poderá utilizar o seu produto ou serviço.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Forms do cadCliente -->
+<div class="container">
+    <div class="d-flex justify-content-around bd-highlight">
+        <form action="/Cliente/Login" method="post">
+            <div class="p-2 bd-highlight">
+                <br>
+                <br>
+                <br>
+                <br>
+                @if (ViewBag.NaoExiste)
+                {
+                    <div class="alert alert-danger">Usuário não encontrado</div>
+                }
+                <h3 class="center">Entrar na minha conta</h3>
+                <br>
+                <div align="center">
+                    <input name="EmailLog" type="email" class="form-control new-input" aria-describedby="emailHelp" placeholder="Digite seu email">
+                </div>
+                <br>
+                <div align="center">
+                    <input name="SenhaLog" type="password" class="form-control new-input" placeholder="Digite sua senha">
+                </div>
+                <br>
+                <div class="center">
+                    <button type="button" class="btn btn-link link" data-toggle="modal" data-target="#exampleModal">Esqueci minha senha</button>
+                </div>
+                <br>
+                <div class="center">
+                    <button class="btn btn-outline-dark btn-md">Entrar</button>
+                </div>
+            </div>
+        </form>
+        <div class="p-2 bd-highlight">
+            <div class="linha">
+            </div>
+        </div>
+        <div class="p-2 bd-highlight">
+            <form action="/Cliente/cadCliente" method="post">
+
+               @if (ViewBag.erro != null)
+                {
+                <div>
+                    <div class="alert alert-danger">
+                        Não foi possivel realizar o cadastro, contate o administrador.
+                    </div>
+                </div>
+                }
+                <h3 class="center">Criar uma nova conta</h3>
+                <br>
+                <div align="center">
+                    <input name="Nome" type="text" class="form-control new-input" placeholder="Digite seu nome">
+                </div>
+                <br>
+                <div align="center">
+                    <input name="Email" type="email" class="form-control new-input" aria-describedby="emailHelp" placeholder="Digite seu email">
+                </div>
+                <br>
+                <div align="center">
+                    <input name="Senha" type="password" class="form-control new-input" placeholder="Digite sua senha">
+                </div>
+                <br>
+                <div align="center">
+                    <input name="CEP" type="text" class="form-control new-input" placeholder="Digite seu CEP">
+                </div>
+                <br>
+                <div align="center">
+                    <input name="Telefone" type="text" class="form-control new-input" placeholder="(DDD) 00000-0000">
+                </div>
+                <div class="center">
+                    <br>
+                    <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/" target="_blank" class="link">Não sei meu CEP</a>
+                </div>
+                <br>
+                <div class="center">
+                    <h7 class="font-weight-lighter">
+                        Ao cadastrar você estará de acordo com
+                    </h7>
+                    <br />
+                    <button type="button" class="btn btn-link link btn-sm" data-toggle="modal" data-target="#exampleModalLong">Termos e Condições e as Políticas de Privacidade</button>
+                    <br>
+                    <br>
+                    <button class="btn btn-outline-dark btn-md">Cadastrar</button>
+                </div>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

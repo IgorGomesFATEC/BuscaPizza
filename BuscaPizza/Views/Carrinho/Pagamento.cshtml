@@ -1,0 +1,68 @@
+﻿@model  BuscaPizza.Models.Cliente
+@using BuscaPizza.Models
+@{
+    ViewBag.Title = "Pagamento";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Cliente cliente = (Cliente)Session["cliente"];
+}
+
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Carrinho/Endereco/@cliente.id">
+                        <img src="~/img/voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br>
+<br>
+<h3 align="center">Forma de Pagameto</h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="d-flex justify-content-around bd-highlight">
+        <div class="p-2 bd-highlight">
+            <a href="/Carrinho/FinalizarPagamento/0">
+                <img src="~/img/credito.png" height="118" width="118" align="left">
+            </a> <br>
+            <p>Crédito</p>
+        </div>
+        <div class="p-2 bd-highlight">
+            <a href="/Carrinho/FinalizarPagamento/1">
+                <img src="~/img/debito.png" height="118" width="118">
+            </a> <br>
+            <p>Débito</p> <br>
+        </div>
+        <div class="p-2 bd-highlight">
+            <a href="/Carrinho/FinalizarPagamento/2">
+                <img src="~/img/dinheiro.png" height="118" width="118">
+            </a> <br>
+            <p>Dinheiro</p> <br>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>

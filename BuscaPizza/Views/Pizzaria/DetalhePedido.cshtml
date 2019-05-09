@@ -1,0 +1,127 @@
+﻿@model BuscaPizza.Models.DetalheCompra
+@using BuscaPizza.Models
+@{
+    ViewBag.Title = "Carrinho";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Pizzaria pizzaria = (Pizzaria)Session["pizzaria"];
+    Pedido pedido = new Pedido();
+    var a = 0;
+    decimal total = 0;
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Pizzaria/readPedidos/@pizzaria.Id">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container" align="center">
+    <br />
+    <h3>Detalhe Compra</h3>
+    <br />
+    <h5>Carrinho</h5>
+    <table class="table table-bordered">
+        <thead class="barra2">
+            <tr>
+                <th scope="col">Nº</th>
+                <th scope="col">Pedido</th>
+                <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Carrinho)
+            {
+                <tr>
+                    @{
+                        a++;
+                        total = total + item.Total;
+                    }
+                    <th scope="row">@a</th>
+                    <td>@item.id</td>
+                    <td>@item.NomeProduto</td>
+                    <td>@item.QTD</td>
+                    <td>R$ @item.preco</td>
+                    <td>R$ @item.Total</td>
+                </tr>
+
+            }
+        </tbody>
+        <br />
+        <br />
+    </table>
+    <h4 align="right">Total</h4>
+    <h5 align="right">R$ @total</h5>
+    <br />
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <a class="card-text">
+                        <h5>Endereço</h5> <hr />
+                        <label>CEP: @ViewBag.resumo.CEP</label>
+                        <br>
+                        <label>Logradouro: @ViewBag.resumo.logradouro </label>
+                        <br />
+                        <label>Numero: @ViewBag.resumo.numero</label>
+                        <br />
+                        <label>Complemento: @ViewBag.resumo.complemento</label>
+                        <br />
+                        <label>Bairro:@ViewBag.resumo.bairro</label>
+                        <br />
+                        <label>Cidade: @ViewBag.resumo.Cidade (@ViewBag.resumo.UF)</label>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <a class="card-text">
+                        <h5>Outras Informações</h5> <hr />
+                        <p>Número do Pedido: @ViewBag.id_Pedido</p>
+                        <p>Data do Pedido: @ViewBag.resumo.dataHora</p>
+                        <p>Forma de Pagamento: @ViewBag.resumo.formaPagamento</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <a class="card-text">
+                        <h5>Definir status de pedido</h5> <hr />
+                        <a href="/Pizzaria/PedidoCaminho/@ViewBag.id_Pedido" class="btn btn-outline-warning">Pedido a Caminho</a>
+                        <a href="/Pizzaria/PedidoEntregue/@ViewBag.id_Pedido" class="btn btn-outline-success">Pedido Entregue</a>
+                        <a href="/Pizzaria/PedidoRecusado/@ViewBag.id_Pedido" class="btn btn-outline-danger">Pedido Recusado</a>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

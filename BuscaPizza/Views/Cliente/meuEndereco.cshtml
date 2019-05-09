@@ -1,0 +1,115 @@
+﻿@model  BuscaPizza.Models.Cliente
+@using BuscaPizza.Models
+@{
+    Layout = "~/Views/LayoutPage.cshtml";
+    ViewBag.Title = "Minha Endereço";
+    Cliente cliente = (Cliente)Session["cliente"];
+    var a = 0;
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <!-- Linkar com a página minha conta cliente -->
+                    <a class="nav-link" href="/Cliente/MinhaConta/@cliente.id">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br />
+<div class="container">
+    <h3 align="center">Adicionar Endereco</h3>
+    <br />
+
+    @if (ViewBag.erro != null)
+    {
+        <div>
+            <div class="alert alert-danger">
+                Não foi possivel realizar o cadastro, contate o administrador.
+            </div>
+        </div>
+        <br />
+    }
+   
+    <form action="/Cliente/cadEndereco" method="post">
+        <div class="input-group mb-3">
+
+            <input type="hidden" name="id_cli" value="@cliente.id">
+            <input type="text" name="CEP" class="form-control" placeholder="Digite o CEP" aria-describedby="button-addon1">
+            <div class="input-group-append">
+                <button class="btn btn-outline-dark btn-md" id="button-addon1">Criar</button>
+            </div>
+        </div>
+    </form>
+    <br />
+    <hr />
+</div>
+<h3 align="center">Meus endereços</h3>
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Exemplos endereços -->
+        @foreach (var end in ViewBag.Endereco)
+        {
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <div class="card-title">
+                                <a class="right" href="/Cliente/updateEndereco/@end.id_endereco">
+                                    <img src="~/img/editar.png" width="16" height="16" />
+                                </a>
+                                <a href="/Cliente/delEndereco/@end.id_endereco">
+                                    <img src="~/img/close.png" width="16" height="16" />
+                                </a>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @{a++;}
+                                    <h6>Endereço @a</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="card-text">
+                            <label>CEP: @end.CEP</label>
+                            <br>
+                            <label>Logradouro: @end.logradouro </label>
+                            <br />
+                            <label>Numero: @end.numero</label>
+                            <br />
+                            <label>Complemento: @end.complemento</label>
+                            <br />
+                            <label>Bairro:@end.bairro</label>
+                            <br />
+                            <label>Cidade: @end.Cidade (@end.UF)</label>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- Fim dos exemplos endereços -->
+    </div>
+</div>
+

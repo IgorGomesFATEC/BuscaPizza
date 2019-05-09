@@ -1,0 +1,123 @@
+﻿@model BuscaPizza.Models.Pizzaria
+@using BuscaPizza.Models
+@{
+    ViewBag.Title = "minhaPizzaria";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Pizzaria pizzaria = (Pizzaria)Session["pizzaria"];
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Pizzaria/dashboard">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <h6>Olá Administrador, @pizzaria.NomePizzaria</h6>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- Modal do exclusão de conta -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header barra2">
+                    <h5 class="modal-title" id="exampleModalLabel">Exclusão de conta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    Enviaremos a sua solicitação para os nossos administradores, você receberá as instruções pelo email
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <input type="email" class="form-control new-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu email">
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div align="center">
+
+
+</div>
+<br>
+<div class="container">
+    <div align="center">
+        @if (ViewBag.erro != null)
+        {
+            <div>
+                <div class="alert alert-danger">
+                    Não foi possivel realizar a alteração, contate o administrador.
+                </div>
+            </div>
+        }
+        <br>
+        <h3>Minha conta</h3>
+        <h6>Todos os detalhes da sua conta</h6>
+        <form action="/Pizzaria/minhaPizzaria" method="post">
+            <input type="hidden" name="Id" value="@pizzaria.Id" />
+            <div class="form-group">
+                <h6>Nome da Pizzaria</h6>
+                <input name="Nome" type="text" class="form-control new-input" value="@ViewBag.Pizzaria.NomePizzaria">
+            </div>
+            <div class="form-group">
+                <h6>Email do Administrador</h6>
+                <input name="Email" type="email" class="form-control new-input" id="exampleInputEmail1" aria-describedby="emailHelp" value="@ViewBag.Pizzaria.Email">
+            </div>
+            <div class="form-group">
+                <h6>Senha do Administrador</h6>
+                <input name="Senha" type="password" class="form-control new-input" value="@ViewBag.Pizzaria.Senha">
+            </div>
+            <div class="form-group">
+                <h6>Telefone</h6>
+                <input name="Telefone" type="text" class="form-control new-input" value="@ViewBag.Pizzaria.Telefone">
+            </div>
+            <div class="form-group">
+                <h6>CNPJ da Pizzaria</h6>
+                <input name="Cnpj" type="text" class="form-control new-input" value="@ViewBag.Pizzaria.CNPJ">
+            </div>
+            <br>
+            <!--TODO Tentar fazer update com checkbox-->
+            <!--  <div class="form-check">
+            <input class="form-check-label" type="checkbox" value="Sim" id="defaultCheck1">
+            <label  name ="Status" class="form-check-label" for="defaultCheck1"><h6>Desativar pizzaria</h6></label>
+        </div>-->
+            <h6>Escolher ícone da pizzaria</h6> <br />
+            <input type="file" name="file" /> <br /> <br />
+            <button type="button" class="btn btn-link link" data-toggle="modal" data-target="#exampleModal2">Para a exclusão da conta, clique aqui</button>
+            <br />
+            <br />
+            <a class="btn btn-outline-success btn-md" href="/Pizzaria/ativarPizzaria/@pizzaria.Id">Ativar pizzaria</a>
+            <a class="btn btn-outline-danger btn-md" href="/Pizzaria/desativarPizzaria/@pizzaria.Id">Desativar Pizzaria</a><br />
+            <br>
+            <br>
+            <button class="btn btn-outline-dark btn-md">Salvar alterações</button>
+            <br />
+            <br />
+        </form>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@model  BuscaPizza.Models.Cliente
+@using BuscaPizza.Models
+@{
+    Layout = "~/Views/LayoutPage.cshtml";
+    ViewBag.Title = "Meu Endereço";
+    Cliente cliente = (Cliente)Session["cliente"];
+}
+
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <!-- Linkar com a página de endereços -->
+                    <a class="nav-link" href="/Cliente/meuEndereco/@cliente.id">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br>
+<h3 align="center">Alteração de endereço</h3>
+<br>
+<div align="center">
+    <form action="/Cliente/updateEndereco" method="post">
+        <input name="id_end" type="hidden" value="@ViewBag.end.id_endereco" />
+        <div class="form-group">
+            <h6>CEP</h6>
+            <input name="cep" type="text" class="form-control new-input" value="@ViewBag.end.CEP" disabled="disabled">
+        </div>
+
+        <div class="form-group">
+            <h6>Rua</h6>
+            <input name="logradouro" type="text" class="form-control new-input"  disabled="disabled" value="@ViewBag.end.logradouro">
+        </div>
+
+        <div class="form-group">
+            <h6>Bairro</h6>
+            <input name="bairro" type="text" class="form-control new-input"  disabled="disabled" value="@ViewBag.end.bairro">
+        </div>
+
+        <div class="form-group">
+            <h6>Numero</h6>
+            <input name="numero" type="text" class="form-control new-input" value="@ViewBag.end.numero">
+        </div>
+
+        <div class="form-group">
+            <h6>Complemento</h6>
+            <input name="complemento" type="text" class="form-control new-input" value="@ViewBag.end.complemento">
+        </div>
+        <div class="form-group">
+            <h6>Cidade</h6>
+            <input name="cidade" type="text" class="form-control new-input" disabled="disabled" value="@ViewBag.end.Cidade">
+        </div>
+        <div class="form-group">
+            <h6>Estado</h6>
+            <input name="estado" type="text" class="form-control new-input"  disabled="disabled" value="@ViewBag.end.UF">
+        </div>
+        <br>
+        <button class="btn btn-outline-dark">Cadastrar</button>
+    </form>
+</div>
+	

@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "LoginPizzaria";
+    Layout = "~/Views/LayoutPage.cshtml";
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/BuscaPizza/Home">
+                        <img src="~/img/Home.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- Modal do Esqueci Minha Senha administrador -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header barra2">
+                    <h5 class="modal-title" id="exampleModalLabel">Esqueci minha senha de administrador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    Coloque o email de administrador, você receberá  um email para alterar sua senha de administrador
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <input type="email" class="form-control new-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu email">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<!-- Forms para o login do administrador pizza -->
+<div class="container">
+    <div align="center">
+        <div class="col-md-6">
+            <br>
+            <br>
+            @if (ViewBag.NaoExiste)
+            {
+                <div class="alert alert-danger">Pizzaria não encontrada</div>
+            }
+            <br>
+            <br>
+            <h3 class="center">Pizzaria seja bem vinda!</h3>
+            <br>
+            <form action="/Pizzaria/LoginPizzaria" method="post">
+                <div class="form-group">
+                    <div align="center">
+                        <input name="email" type="email" class="form-control new-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu email">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div align="center">
+                        <input name="senha" type="password" class="form-control new-input" id="exampleInputPassword1" placeholder="Digite sua senha">
+                    </div>
+                </div>
+                <br>
+                <div class="center">
+                    <button type="button" class="btn btn-link link" data-toggle="modal" data-target="#exampleModal">Esqueci minha senha</button>
+                </div>
+                <br>
+                <div class="center">
+                    <button class="btn btn-outline-dark btn-md">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,80 @@
+﻿@using BuscaPizza.Models
+@{
+    ViewBag.Title = "cadCardapio";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Pizzaria pizzaria = (Pizzaria)Session["pizzaria"];
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Pizzaria/dashboard">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <h6>Olá Administrador, @pizzaria.NomePizzaria</h6>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br />
+<div class="container">
+    <h3 align="center">Criar cardápio</h3>
+    <br />
+    <form action="/Cardapio/cadCardapio" method="post">
+        <div class="input-group mb-3">
+            <input type="hidden" name="id_Pizzaria" value="@pizzaria.Id">
+            <input type="text" name="Nome" class="form-control" placeholder="Digite o nome do cardápio" aria-describedby="button-addon1">
+            <div class="input-group-append">
+                <button class="btn btn-outline-dark btn-md" id="button-addon1">Criar</button>
+            </div>
+        </div>
+    </form>
+    <div align="center">
+        <a class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Alterar cardápio</a>
+    </div>
+    <br>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Exemplos cardápios -->
+        @foreach (var p in ViewBag.cardapios)
+        {
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div align="center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>@p.nomeCardapio <a href= "/Produto/cadProduto/@p.id"><img src="~/img/Add.png" width="16" height="16" /></a><a href="/Produto/readProduto/@p.id"><img src="~/img/lupa.png" width="16" height="16" title="Consultar Produtos"/></a> <a href="/Cardapio/deleteCardapio/@p.id"> <img src="~/img/close.png" width="16" height="16" /></a></h3>
+                            <form action="/Cardapio/updateCardapio/@p.id" method="post">
+                                <div class="collapse" id="collapseExample">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="Nome" class="form-control" placeholder="Nome" aria-describedby="button-addon1">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-success btn-md" id="button-addon1">Salvar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@model Dictionary<string, List<BuscaPizza.Models.Produto>>
+@using BuscaPizza.Models
+@{
+    ViewBag.Title = "CardapioCliente";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Cliente cliente = (Cliente)Session["cliente"];
+    int a = 0;
+}
+
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Pizzaria/Menu">
+                        <img src="~/img/voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br>
+<div class="container" align="center">
+    <h3>@ViewBag.name</h3>
+    <br>
+    <!-- Igor penso eu que você deve colocar um foreach para cada cardápio no banco e dentro do body de cada cardápio criar outro foreach para consultar os produtos presentes daquele cardápio -->
+    @foreach (var c in Model.Keys)
+    {
+        <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne1">
+                    @{ a++;}
+                    <a data-toggle="collapse" data-parent="#accordionEx" href="#@c.Replace(" ","_")" aria-expanded="true" aria-controls="collapseOne1">
+                        <h5 class="mb-0">
+                            @c <i class="fa fa-angle-down rotate-icon"></i>
+                        </h5>
+                    </a>
+                </div>
+                <div id="@c.Replace(" ","_")" class="collapse- collapse" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var p in Model[c])
+                            {
+                                <div class="col-lg-3 col-md-6 mb-4">
+                                    <div align="center">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h3>@p.NomeProduto</h3>
+                                                </div>
+                                                <img src="~/img/Pizzas/CalabresacomQueijo.png" class="imgcard">
+                                                <p class="card-text">@p.Preco</p>
+                                                <p class="card-text">@p.descricao</p>
+                                                <div class="card-footer">
+                                                    <a  class="btn btn-outline-warning" href="\Carrinho\Add\@p.id" >Adicionar ao carrinho</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

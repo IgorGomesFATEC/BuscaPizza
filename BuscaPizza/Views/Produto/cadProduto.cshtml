@@ -1,0 +1,59 @@
+﻿@using BuscaPizza.Models
+@{
+    ViewBag.Title = "cadCardapio";
+    Layout = "~/Views/LayoutPage.cshtml";
+    Pizzaria pizzaria = (Pizzaria)Session["pizzaria"];
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Cardapio/cadCardapio/@pizzaria.Id">
+                        <img src="~/img/Voltar.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <h6>Olá Administrador, @pizzaria.NomePizzaria</h6>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div align="center">
+        <div class="col-md-8">
+            <br>
+            <h3>Criação de produto</h3>
+            <br>
+            <form action="/Produto/cadProduto" method="post">
+                <input type="hidden" name="id_Cardapio" value="@ViewBag.CardapioId" />
+                <div class="form-group">
+                    <input name ="Nome" type="text" class="form-control new-input" placeholder="Digite o nome do produto">
+                </div>
+                <div class="form-group">
+                    <input name="Preco" type="text" class="form-control new-input" placeholder="Preço">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descrição do produto</label>
+                    <textarea name="Descricao" class="form-control" id="exampleFormControlTextarea1" rows="2" style="width: 50%"></textarea>
+                </div>
+                <button class="btn btn-outline-secondary">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,99 @@
+﻿@model  BuscaPizza.Models.Pizzaria
+@{
+    Layout = "~/Views/LayoutPage.cshtml";
+    ViewBag.Title = "Cadastro de Pizzarias";
+}
+<header>
+    <nav class="navbar navbar-expand-md barra">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/BuscaPizza/Home">
+                        <img src="~/img/home.png" class="botao">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <p class="navbar-brand mx-auto titulo">Busca Pizza</p>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link"></p>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- Modal dos Termos de Uso -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header barra2">
+                <h5 class="modal-title" id="exampleModalLongTitle">Termos e Condições e as Políticas de Privacidade</h5>
+            </div>
+            <div class="modal-body">
+                A) Defina os termos a serem usados no documento. Lembre-se que o usuário, muitas vezes, não tem conhecimento técnico sobre programação ou tecnologia, por isso é importante que você explique a ele de forma clara, objetiva e específica o significado de cada um dos termos utilizados para para a execução do serviços oferecidos ou utilização do produto. B) Delimite o escopo do serviço/produto a ser oferecido via site ou aplicativo. Informa os usuários o que eles estão utilizando ou adquirindo, somente isso evitará reclamações relacionadas ao serviço ou produto. Seja transparente com o seu cliente. C) Informe as responsabilidades da sua empresa e do usuário. Defina a responsabilidade de cada uma das partes. Indicamos a utilização moderada das cláusulas que limitam responsabilidades, tais como as cláusulas de “disclaimer” (Todas as opiniões expressadas nos comentários deste site-aplicativo não expressam a opinião da Startup, mas tão somente a opinião de quem os escreveu”) ou, então, as excludentes de responsabilidade (Exemplo de cláusula: A Startup não se responsabiliza por qualquer dano ou prejuízo com envio de informações ou de conteúdo publicitário que não tenham sido disparados pela própria Startup, sejam esses últimos legítimos ou indesejados (Spam), e também não se responsabiliza pelo conteúdo das opiniões postadas no aplicativo ou site). Elas são uma ótima forma de limitação de responsabilidade, gerando menos riscos a startup, porém utilize-a com moderação para que seu contrato não seja anulado por ser excessivamente oneroso a uma das partes quando numa futura ação judicial e, com isso, o objetivo da política de privacidade ou termo de uso não seja cumprido. D) Divulgue a quem pertence os direitos autorais. Inclua cláusula sobre direitos autorais para impossibilitar o uso da tecnologia desenvolvida pela sua Startup por terceiros não autorizados. E) Disponha como se dará o processo de compra pelo usuário. Informe como será feita a aquisição do seu serviço/produto, como será o processo de devolução ou rescisão do contrato, se haverá reembolso dos valores pagos e como será feito, além disso como deverá proceder para cancelar o serviço. Indicamos, por outro lado, que a “Política de Privacidade” contenham as seguintes cláusulas: A) Expresse quais informações serão coletadas e de que forma. B) Preveja se as informações coletadas serão disponibilizadas a terceiros e como serão disponibilizadas. C) Indique como serão armazenadas as informações coletadas. D) Informe as modificações da política de privacidade. Caso você venha a alterar a política de privacidade, informe os usuários sobre a modificação para que eles estejam cientes da forma com que serão tratados a partir de então. Além disso, alerte como os usuários terão conhecimento da nova política de privacidade. Indicamos nesse ponto, que qualquer alteração seja amplamente divulgada, para que todas tenham conhecimento das novas regras. E) Divulgue na Política de Privacidade se o seu aplicativo utiliza cookies. F) Defina qual será a faixa etária que poderá utilizar o seu produto ou serviço.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div align="center">
+        @{
+            if (ViewBag.erro != null)
+            {
+                <div>
+                    <div class="alert alert-danger">
+                        Não foi possivel realizar o cadastro, contate o administrador.
+                    </div>
+                </div>
+            }
+        }
+        <!-- Forms do ADM Pizzaria -->
+        <h3 class="center">Pizzaria seja bem vindo !</h3>
+        <h5 class="center">Cadastre-se para entrar nos serviços Busca Pizza</h5>
+        <br>
+        <form action="/Pizzaria/cadPizzaria" method="post">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input name="NomePizzaria" type="text" class="form-control new-input" placeholder="Digite o nome da pizzaria">
+                </div>
+                <div class="form-group">
+                    <input name="Email" type="email" class="form-control new-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite o email de administrador">
+                </div>
+                <div class="form-group">
+                    <input name="Senha" type="password" class="form-control new-input" id="exampleInputPassword1" placeholder="Digite a senha de administrador">
+                </div>
+                <div class="form-group">
+                    <input name="CEP" type="text" class="form-control new-input" placeholder="Digite o CEP da pizzaria">
+                </div>
+                <div class="form-group">
+                    <input name="Telefone" type="text" class="form-control new-input" placeholder="(DDD) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <input name="CNPJ" type="text" class="form-control new-input" placeholder="CNPJ">
+                </div>
+            </div>
+            <br>
+            <h7 class="font-weight-lighter">Ao cadastrar você estará de acordo com </h7>
+            <br>
+            <button type="button" class="btn btn-link link btn-sm" data-toggle="modal" data-target="#exampleModalLong">Termos e Condições e as Políticas de Privacidade</button>
+            <br>
+            <br>
+            <button class="btn btn-outline-dark btn-md">Cadastrar</button>
+        </form>
+    </div>
+</div>
+<br>
